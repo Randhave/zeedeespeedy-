@@ -9,7 +9,7 @@ const Connection = async () => {
 
     } catch (error) {
         console.log("database not connected",error.message);
-    }
-}
-
+    }  
+}  
+ 
 export default Connection ;
