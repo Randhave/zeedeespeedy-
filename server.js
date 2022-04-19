@@ -11,7 +11,7 @@ import configApp from "./config-app.js";
 
 const app = express()
 // const port = 4000
-const PORT = process.env.PORT || 8000
+const PORT = process.env.PORT || 4000
 
 
 // config-app
