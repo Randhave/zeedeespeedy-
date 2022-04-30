@@ -41,11 +41,12 @@ export const newCustomer = async (req, res) => {
 
         console.log("otp ", varifyOTP)
       
-        // const varifyUserUrl = `http://localhost:4000/user/login/varify/email/url/${varifyToken}`
-        const varifyUserUrl = `${req.protocol}://${req.get("host")}/user/login/varify/email/url/${varifyToken}`
+        const varifyUserUrl = `https://zeedeespeed.herokuapp.com/user/login/varify/email/url/${varifyToken}`
+        // const varifyUserUrl = `${req.protocol}://${req.get("host")}/user/login/varify/email/url/${varifyToken}`
+        // https://zeedeespeed.herokuapp.com/
 
-        // const varifyUserOTP = `http://localhost:4000/user/login/varify/email/otp/${varifyOTP}`
-        const varifyUserOTP = `${req.protocol}://${req.get("host")}/user/login/varify/email/otp/${varifyOTP}`
+        const varifyUserOTP = `https://zeedeespeed.herokuapp.com/user/login/varify/email/otp/${varifyOTP}`
+        // const varifyUserOTP = `${req.protocol}://${req.get("host")}/user/login/varify/email/otp/${varifyOTP}`
 
         const message = `Thank you for registering with Doosy. To complete your registration with Doosy, 
                         please verify your email address by clicking the link below.
