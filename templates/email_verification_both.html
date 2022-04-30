@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Email Verification</title>
+    <style>
+       
+</style>
+</head>
+
+<body style="font-family: 'Segoe UI', sans-serif;background: #f4f5fa;padding: 20px;">
+    <table width="100%" border="0" bgcolor="#ffffff" cellspacing="0" cellpadding="0" style="max-width: 600px;margin: 0 auto; box-shadow: 0px 9px 17px 4px rgba(0,0,0,0.05); text-align: left;">
+        <tbody>
+            <tr>
+                <td colspan="2" style="text-align: center; padding: 20px 10px 10px 10px; ">
+                    <img src="{{applicationLogo}}" alt="{{applicationName}}" width="50px">  
+                </td>               
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <img src="{{applicationBigLogo}}" alt="Banner image">
+                </td>
+            </tr>   
+            
+            <tr>
+                <td colspan="2" style="padding: 30px 20px 0px 20px;">
+                    <span span style="font-weight: 700; font-size: 17px;">Dear {{customerName}},</span>
+
+                    <p style="line-height: 20px;">{{thankyouMessage}} {{completeRegistrationContent}}{{emailLinkContent}}</p>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 0px 0px 0px 20px;" width="120px">
+                    <a href="{{verify}}" target="_blank" style="font-size:12px;font-weight: 500;letter-spacing: 1px;padding: 9px 19px; margin:9px 0;display:inline-block;cursor:pointer;background: #00D9AE;color: #fff;text-decoration: none;">Click Here</a>
+                </td>
+                <td style="padding: 0px 20px 0px 0px;">
+                    <p style="line-height: 20px;"><b>OR</b></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="padding: 0px 20px 0px 20px;">
+
+                    <p style="line-height: 20px;">{{otpLinkContent}}</p>
+                   
+                    <p style="line-height: 20px;"><span style="font-size:12px;font-weight: 500;letter-spacing: 1px;padding: 9px 19px; margin:9px 0;display:inline-block;text-transform: uppercase;cursor:pointer;background: #00D9AE;color: #fff;text-decoration: none;">{{OTP}}</span></p>
+
+                    <p style="line-height: 20px;">{{OtpValidity}}</p>
+         
+                </td>
+            </tr>
+         <tr>
+                <td colspan="2" style="padding: 10px 20px;">Thanks and Regards,<br>Doosy Customer support team</td>
+            </tr>
+            <tr>
+              <td colspan="2" style="color: #666666;font-size:14px; padding: 10px 20px;">
+                 <span style="padding-bottom: 5px; display: inline-block;">Customer Care No: {{customerCareContact}}</span><br>
+                    <span style="padding-bottom: 5px; display: inline-block;">Email address: <a href="javascript:void(0);" style="color: #666666;font-size:14px;">{{customerCareEmail}}</a> </span><br>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

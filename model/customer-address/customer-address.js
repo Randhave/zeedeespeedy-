@@ -48,7 +48,7 @@ const customerAddressSchema = new mongoose.Schema({
     },
     defaultAddress: {
         type: Boolean,
-        default: true
+        default: false
     },
     firstName: {
         type: String,

@@ -5,7 +5,7 @@ import Customer from '../../../model/customer/customer.js';
 import sendToken from "../../../utils/jwtToken.js";
 import { sendEmail } from '../../../utils/sendEmail.js'
 
-
+ 
 // customer login 
 export const customerLogin = async (req, res) => {
     try {
@@ -93,7 +93,7 @@ export const changeEmail = async (req, res) => {
         }
         data.email = newEmail
         await data.save()
-        let data_ = await User.findById(req.user.id)
+        let data_ = await Customer.findById(req.user.id)
         res.json({ success: true, data_ })
 
     } catch (error) {
@@ -124,7 +124,7 @@ export const changePassword = async (req, res) => {
         data.password = newPassword
         await data.save()
 
-        let data_ = await User.findById(req.user.id);
+        let data_ = await Customer.findById(req.user.id);
         res.json({ success: true, data_ })
 
     } catch (error) {

@@ -80,6 +80,7 @@ export const allUsers = async (req, res) => {
 export const getUser = async (req, res) => {
     try {
         let data = await User.findById(req.params.userId)
+        console.log("req.params.id ", req.params);
         res.json({
             success: true,
             data
@@ -159,11 +160,13 @@ export const assignRole = async (req, res) => {
     try {
         let { newRole } = req.body;
         let data = await User.findById(req.params.userId)
-        data.role = newRole;
+        data.Role = newRole;
+        console.log("new role ", newRole)
         await data.save();
         let data_ = await User.findById(req.params.userId);
         res.json({
             success: true,
+            message: "Role assigned successfully",
             data_
         })
     } catch (error) {

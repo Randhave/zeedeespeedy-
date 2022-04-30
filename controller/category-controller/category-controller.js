@@ -80,9 +80,13 @@ export const updateCategory = async (req, res) => {
 export const changeStatus = async (req, res) => {
     try {
         let category = await Category.findById(req.params.categoryId);
-        let { status } = req.body.status
-        category.active = status;
-        await category.save()
+        let status = req.body.status
+        if (status) {
+            category.active = status;
+            await category.save()
+        }
+        console.log("status ", status);
+        console.log("category ", category)
         let data = await Category.findById(req.params.categoryId);
         res.status(200).json({
             success: true,

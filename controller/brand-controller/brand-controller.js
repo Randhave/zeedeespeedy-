@@ -57,8 +57,10 @@ export const changeStatus = async (req, res) => {
         let data = await Brand.findById(req.params.brandId);
 
         let { status } = req.body;
-        data.active = status
-        data.save()
+        if (status) {
+            data.active = status
+            await data.save()
+        }
 
         let data_ = await Brand.findById(req.params.brandId)
         res.status(200).json({

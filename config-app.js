@@ -4,6 +4,8 @@ import cookieParser from "cookie-parser";
 import cors from 'cors'
 import bodyParser from "body-parser";
 
+import swaggerUi from 'swagger-ui-express'
+import swaggerJsondoc from 'swagger-jsdoc';
 
 // for image uploading
 import cloudinary from 'cloudinary'
@@ -26,6 +28,7 @@ import vendorLoginRoutes from './router/login-routes/vendor-login/vendor-login.j
 import productRoutes from './router/product-routes/product-routes.js';
 import cuisineRoutes from './router/cuisine-routes/cuisine-routes.js';
 
+import swaggerRoutes from './swagger-config.js'
 const configApp = express()
 
 
@@ -34,7 +37,13 @@ configApp.use(fileUpload({
     useTempFiles: true
 }))
 
-configApp.use(cors());
+// configApp.use(cors());
+configApp.use(
+    cors({
+        credentials: true,
+        origin: "https://zeedeespeed.herokuapp.com/",
+    })
+);
 configApp.use(cookieParser())
 configApp.use(express.json())
 configApp.use(bodyParser.json({ extends: true }))
@@ -54,16 +63,14 @@ configApp.get("/author", (req, res) => {
 })
 // router
 configApp.use("/users", userRoutes)
+configApp.use("/user/login", userLoginRoutes)
 
 //brand routes
 configApp.use("/brand", brandRoutes)
-
+ 
 // customer routes
 configApp.use("/customer", customerRoutes)
 configApp.use("/customer", customerAddressRoutes)
-
-// login routes
-configApp.use("/user/login", userLoginRoutes)
 configApp.use("/user/login/customer", customerLoginRoutes)
 
 // category routes
@@ -73,13 +80,18 @@ configApp.use("/subcategory", subCategoryRoutes)
 
 //vendor
 configApp.use("/vendor", vendorRoutes)
-configApp.use("/user", vendorLoginRoutes)
-
+configApp.use("/user/vendor", vendorLoginRoutes)
+ 
 // wallet
 configApp.use("/wallet", walletRoutes)
 
 configApp.use("/product", productRoutes)
 configApp.use("/cuisine", cuisineRoutes)
+
+
+// swagger
+configApp.use("/", swaggerRoutes)
+
 
 // setup of cloudinary for images
 cloudinary.config({
@@ -87,5 +99,46 @@ cloudinary.config({
     api_key: process.env.API_KEY,
     api_secret: process.env.API_SECRET_KEY
 })
+
+
+
+// const swaggerOptions = {
+//     swaggerDefinition: {
+//         info: {
+//             title: "Doosy Application",
+//             description:
+//                 "Doosy Application API reference for developers",
+//         },
+//         servers: [
+//             {
+//                 url: "http://localhost:4000/"
+//                 // url : "https://zeedeespeed.herokuapp.com/"
+//             }
+//         ]
+//     },
+//     // routes
+//     apis: ["./router/*/*.js"]
+
+// }
+
+// const swggerDocs = swaggerJsondoc(swaggerOptions);
+// configApp.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swggerDocs))
+
+
+// /**
+//  * @swagger
+//  * /hello:
+//  *  put:
+//  *    description : Uset to get a customer
+//  *    responses :
+//  *      '200' : 
+//  *          description : A successfull response
+//  * 
+//  */
+// configApp.get("/hello", (req, res) => {
+
+//     res.status(200).send("Hello Moto")
+// })
+
 
 export default configApp

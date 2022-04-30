@@ -40,10 +40,12 @@ export const newCustomer = async (req, res) => {
         await data.save({ validateBeforeSave: false })
 
         console.log("otp ", varifyOTP)
+      
+        // const varifyUserUrl = `http://localhost:4000/user/login/varify/email/url/${varifyToken}`
+        const varifyUserUrl = `${req.protocol}://${req.get("host")}/user/login/varify/email/url/${varifyToken}`
 
-        const varifyUserUrl = `http://localhost:4000/user/login/varify/email/url/${varifyToken}`
-
-        const varifyUserOTP = `http://localhost:4000/user/login/varify/email/otp/${varifyOTP}`
+        // const varifyUserOTP = `http://localhost:4000/user/login/varify/email/otp/${varifyOTP}`
+        const varifyUserOTP = `${req.protocol}://${req.get("host")}/user/login/varify/email/otp/${varifyOTP}`
 
         const message = `Thank you for registering with Doosy. To complete your registration with Doosy, 
                         please verify your email address by clicking the link below.
@@ -101,10 +103,10 @@ export const updateCustomerInfo = async (req, res) => {
         let customerId = req.params.customerId
         let data = await Customer.findByIdAndUpdate(customerId, { $set: req.body })
         await data.save()
-
+        let data_ = await Customer.findById(customerId);
         res.status(200).json({
             success: true,
-            data
+            data_
         })
     } catch (error) {
         res.status(400).json({
@@ -120,9 +122,12 @@ export const changeCustomerStatus = async (req, res) => {
         let customerId = req.params.customerId
         let data = await Customer.findById(customerId);
         let { status } = req.body
-        data.active = status;
-        await data.save()
-
+        console.log("status ", status);
+        if (data) {
+            data.active = status;
+            await data.save()
+        }
+        console.log("user ", data);
         let data_ = await Customer.findById(customerId);
         res.status(200).json({
             success: true,
@@ -183,7 +188,9 @@ export const getCustomerWalletBalance = async (req, res) => {
         let data = await Customer.findById(req.params.customerId);
         res.status(200).json({
             success: true,
-            data: data.walletAmt
+            data: {
+                amount: data.walletAmt
+            }
         })
     } catch (error) {
         res.status(400).json({

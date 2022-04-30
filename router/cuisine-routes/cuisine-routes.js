@@ -8,6 +8,13 @@ const cuisineRoutes = express.Router();
 
 const tokenType = "vendorAccessToken"
 
+/**
+ * @swagger
+ * tags:
+ *  name: cuisine-controller
+ */
+
+
 // add cuisine
 cuisineRoutes.post("/", isAuthenticated(Vendor, tokenType), addcuisine)
 

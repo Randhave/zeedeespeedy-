@@ -79,10 +79,10 @@ export const updatesubCategory = async (req, res) => {
 // change subCategory status 
 export const changeStatus = async (req, res) => {
     try {
-        let subCategory = await subCategory.findById(req.params.subCategoryId);
-        let { status } = req.body.status
-        subCategory.active = status;
-        await subCategory.save()
+        let subCategory_ = await subCategory.findById(req.params.subCategoryId);
+        let status = req.body.status
+        subCategory_.active = status;
+        await subCategory_.save()
         let data = await subCategory.findById(req.params.subCategoryId);
         res.status(200).json({
             success: true,
@@ -116,10 +116,16 @@ export const getsubCategory = async (req, res) => {
 // get all subCategory by passing params
 export const getsubCategories = async (req, res) => {
     try {
-        const apiFeatures = new ApiFeatures(subCategory.find(), req.query).buisnesssubCategorySearch().pagination(req.query.pageNumber, req.query.pagesSize);
-        let categories = await apiFeatures.query
-        let resultPerPage = req.query.pagesSize
-        res.status(200).json({ success: true, categories, resultPerPage })
+        // const apiFeatures = new ApiFeatures(subCategory.find(), req.query).buisnesssubCategorySearch().pagination(req.query.pageNumber, req.query.pagesSize);
+        // let categories = await apiFeatures.query
+        // let resultPerPage = req.query.pagesSize
+        // res.status(200).json({ success: true, categories, resultPerPage })
+
+        let data = await subCategory.find();
+        res.status(200).json({
+            success: true,
+            data
+        })
 
     } catch (error) {
         res.status(400).json({

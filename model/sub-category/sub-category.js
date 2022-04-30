@@ -12,7 +12,8 @@ const subCategorySchema = new mongoose.Schema({
     },
     active: {
         type: String,
-        required: true
+        required: true,
+        default: true
     },
     image: {
         public_id: {

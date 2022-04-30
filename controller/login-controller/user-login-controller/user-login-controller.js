@@ -5,7 +5,7 @@ import crypto from 'crypto'
 import sendToken from "../../../utils/jwtToken.js";
 import { sendEmail } from '../../../utils/sendEmail.js'
 
- 
+
 // admin login
 export const adminLogin = async (req, res) => {
     try {
@@ -142,11 +142,11 @@ export const forgotPassword = async (req, res) => {
         await user.save({ validateBeforeSave: false })
 
         // for production
-        // const resetpasswordUrl = `${req.protocol}://${req.get("host")}/password/resetpassword/${resetToken}`  
+        const resetpasswordUrl = `${req.protocol}://${req.get("host")}/user/login/resetpassword/${resetToken}`  
 
         // for devlopment
         // const resetpasswordUrl = `${process.env.FRONT_END_PORT}/resetpassword/${resetToken}`
-        const resetpasswordUrl = `http://localhost:4000/api/v1/user/login/resetpassword/${resetToken}`
+        // const resetpasswordUrl = `http://localhost:4000/user/login/resetpassword/${resetToken}`
 
         const message = `Your password reset token is right now :-- \n\n ${resetpasswordUrl}\n\n If you are not requested this email ! then please ignore it`
 
@@ -170,6 +170,7 @@ export const forgotPassword = async (req, res) => {
 export const resetPassword = async (req, res) => {
     try {
         const token = req.params.token;
+        console.log("token ", token);
         const resetpasswordToken = crypto.createHash("sha256").update(token).digest("hex");
 
         const user = await User.findOne({ resetpasswordToken, resetpasswordExpire: { $gt: Date.now() } })
@@ -182,6 +183,7 @@ export const resetPassword = async (req, res) => {
             res.status(400).json("password is not matching ! Please try again latter")
             return
         }
+        console.log("password: ", req.body.password, "confirm password ", req.body.confirmPassword);
 
         user.password = req.body.password;  // changed the password
 
