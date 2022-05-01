@@ -142,11 +142,11 @@ export const forgotPassword = async (req, res) => {
         await user.save({ validateBeforeSave: false })
 
         // for production
-        const resetpasswordUrl = `${req.protocol}://${req.get("host")}/user/login/resetpassword/${resetToken}`  
+        // const resetpasswordUrl = `${req.protocol}://${req.get("host")}/user/login/resetpassword/${resetToken}`  
 
         // for devlopment
         // const resetpasswordUrl = `${process.env.FRONT_END_PORT}/resetpassword/${resetToken}`
-        // const resetpasswordUrl = `http://localhost:4000/user/login/resetpassword/${resetToken}`
+        const resetpasswordUrl = `https://zeedeespeed.herokuapp.com/user/login/resetpassword/${resetToken}`
 
         const message = `Your password reset token is right now :-- \n\n ${resetpasswordUrl}\n\n If you are not requested this email ! then please ignore it`
 

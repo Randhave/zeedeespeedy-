@@ -199,8 +199,8 @@ userLoginRoutes.put("/resetpassword/:token", resetPassword)
 // varify user by email
 /**
  * @swagger
- * user/login/varify/email/{token}:
- *  put:
+ * /user/login/varify/email/url/{token}:
+ *  get:
  *    summary: varifyCustomerByURL (varify user by email)
  *    tags: [user-login-controller]
  *    parameters:
@@ -212,11 +212,11 @@ userLoginRoutes.put("/resetpassword/:token", resetPassword)
  *       '200':
  *         description:  successfully send an url on email for varify customer/user
  *       '400':
- *         description: cannot send email
+ *         description: cannot varify user
  *       '500':
  *         description: Internal server error
  */
-userLoginRoutes.put("/varify/email/url:token", varifyCustomerByURL)
+userLoginRoutes.get("/varify/email/url/:token", varifyCustomerByURL)
 
 // varify user by otp
 /**

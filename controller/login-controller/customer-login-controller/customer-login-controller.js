@@ -222,15 +222,17 @@ export const varifyCustomerByURL = async (req, res) => {
         }
         user.emailVerified = true
         user.status = "Active"
+        user.active = true
         user.resetCustomerTokenExpire = undefined
         user.varifyCustomerToken = undefined
         user.varifyCustomerOTP = undefined
         user.varifyCustomerOTPExpire = undefined
 
-        user.save()
+        await user.save()
         res.status(200).json({
             success: true,
-            user
+            user,
+            message:"customer successfully varified"
         })
     }
     catch (error) {

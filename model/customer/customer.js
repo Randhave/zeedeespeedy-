@@ -23,6 +23,7 @@ const customerSchema = new mongoose.Schema({
         type: Boolean,
         required: true,
         default: false,
+        // default : true
     },
     phoneNumber: {
         type: Number,
@@ -101,9 +102,7 @@ customerSchema.methods.generateTokenForVarifyCustomer = async function () {
 
 // generate token for varify or activate account by otp
 customerSchema.methods.generateOTP = async function () {
-    const otp = Math.floor(Math.random() * 100) + 11;
-    const otp_ = Math.floor(Math.random() * parseInt("9".repeat(19)))
-    console.log("otp from customer model ", otp_)
+    const otp = Math.floor(Math.random() * parseInt("9".repeat(6)))
     this.varifyCustomerOTP = otp
     this.varifyCustomerOTPExpire = Date.now() + 15 * 60 * 100;
     return otp

@@ -100,45 +100,4 @@ cloudinary.config({
     api_secret: process.env.API_SECRET_KEY
 })
 
-
-
-// const swaggerOptions = {
-//     swaggerDefinition: {
-//         info: {
-//             title: "Doosy Application",
-//             description:
-//                 "Doosy Application API reference for developers",
-//         },
-//         servers: [
-//             {
-//                 url: "http://localhost:4000/"
-//                 // url : "https://zeedeespeed.herokuapp.com/"
-//             }
-//         ]
-//     },
-//     // routes
-//     apis: ["./router/*/*.js"]
-
-// }
-
-// const swggerDocs = swaggerJsondoc(swaggerOptions);
-// configApp.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swggerDocs))
-
-
-// /**
-//  * @swagger
-//  * /hello:
-//  *  put:
-//  *    description : Uset to get a customer
-//  *    responses :
-//  *      '200' : 
-//  *          description : A successfull response
-//  * 
-//  */
-// configApp.get("/hello", (req, res) => {
-
-//     res.status(200).send("Hello Moto")
-// })
-
-
 export default configApp
